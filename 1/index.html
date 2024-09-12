@@ -50,14 +50,17 @@
     <h1>Examples from Prokudin-Gorskii Collection</h1>
     <img src="media/tree_og.jpg">
     <img src="media/tree.jpg">
-    <p>green offset: 0, 0<br>red offset: 8, 0</p>
+    <p>green offset: 8, 0<br>red offset: 12, 0</p>
     <img src="media/seeds_og.jpg">
     <img src="media/seeds.jpg">
+    <p>green offset: 4, -4<br>red offset: 12, -8</p>
+    <img src="media/bridge_og.jpg">
+    <img src="media/bridge.jpg">
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
 
 
     <h1>Failed Alignments</h2>
-    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. It could also be due to the brightness of these images.</p>
+    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. It could also be due to the brightness of these images. Moreover, aligning based on the similarities between the images' RGB values might not be the best indicator.</p>
 
     <h1>Bells & Whistles</h1>
     <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
