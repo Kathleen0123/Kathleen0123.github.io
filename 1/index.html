@@ -13,10 +13,6 @@
             height: auto;
             width: 200px;
         }
-        .sbs {
-            float: left;
-            width: 50%;
-        }
     </style>
 </head>
 <body>
@@ -25,7 +21,7 @@
     <p>In this project, I took the digitized Prokudin-Gorskii glass plate images and then produced color images. The original glass plate images had 3 parts from top to bottom, each using blue, green, and red filters. I extracted these 3 parts and placed them on top of each other to create a color image. The programming language I used was Python.</p>
 
     <h2>Single-Scale Appoach</h2>
-    <p>For smaller image files ('cathedral.jpg', 'monastery.jpg', 'tobolsk.jpg'), I used naive approach (2 for loops) to search for a small displacement that would align the green (or red) and blue parts of the image. The displacements I chose was from -15 to 15. The score for each displacement was calculated using Normalized Cross-Correlation. Eventually, the displacement I chose had the maximum score.</p>
+    <p>For smaller image files ('cathedral.jpg', 'monastery.jpg', 'tobolsk.jpg'), I used naive approach (two for loops) to search for a small displacement that would align the green (or red) part to the blue part of the image. The displacements I chose to search was from -15 to 15. Eventually, the displacement that yielded the maximum score was chosen. The scores were calculated using Normalized Cross-Correlation. </p>
     <img src="media/cathedral.jpg">
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
     <img src="media/monastery.jpg">
@@ -34,7 +30,7 @@
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
 
     <h2>Multiscale Appoach</h2>
-    <p>For larger image files (.tif), I used the image pyramid approach which would provide a faster search. To do so, I chose to downscale the images by 0.125, 0.25, and 0.5. I first downscaled the 2 images and then applied the naive approach described above. Finally, I multiplied the best displacement metrics by 2 to align with metrics at the level above it.</p>
+    <p>For larger image files (.tif), I used the image pyramid approach which provided a faster search. To do so, I chose to downscale the images by 0.125, 0.25, and 0.5. I first downscaled the 2 images and then applied the naive approach described above. Finally, I multiplied the best displacement metrics by 2 to align with metrics at the level above it. This algorithm eventually returned the best displacement at the original scale (scale=1).</p>
     <img src="media/church.jpg">
     <p>green offset: 0, -8<br>red offset: 48, -8</p>
     <img src="media/emir.jpg">
@@ -70,18 +66,18 @@
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
 
     <h2>Challenges</h2>
-    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. It could also be due to the brightness of these images. Moreover, aligning based on the similarities between the images' RGB values might not be the best indicator.</p>
+    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. These might work for some images but not the others. It could also be due to the different brightness of these images, making the calculation of score inaccurate. Moreover, aligning based on the similarities between the images' RGB values might not be the best indicator.</p>
 
     <h2>Bells & Whistles</h2>
     <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
     <img src="media/monastery.jpg" style="display:inline-block;">
     <img src="media/monastery_canny.jpg" style="display:inline-block;">
-    <div class="sbs"><p>green offset: -8, 0<br>red offset: 8, 0</p></div>
-    <div class="sbs"><p>green offset: -4, 0<br>red offset: 4, 0</p></div>
+    <p>Left/Before:<br>green offset: -8, 0<br>red offset: 8, 0</p>
+    <p>Right/After:<br>green offset: -4, 0<br>red offset: 4, 0</p>
     <img src="media/tobolsk.jpg" style="display:inline-block;">
     <img src="media/tobolsk_canny.jpg" style="display:inline-block;">
-    <div class="sbs"><p>green offset: 0, 0<br>red offset: 8, 0</p></div>
-    <div class="sbs"><p>green offset: 4, 0<br>red offset: 8, 0</p></div>
+    <p>Left/Before:<br>green offset: 0, 0<br>red offset: 8, 0</p>
+    <p>Right/After:<br>green offset: 4, 0<br>red offset: 8, 0</p>
 
 </body>
 </html>
