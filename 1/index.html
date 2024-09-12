@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Images of the Russian Empire: Colorizing the Prokudin-Gorskii photo collection</title>
+    <title></title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: "Times New Roman", Times, serif;
+            margin: 50px;
+            text-align: center;
+            background-color: #ADD8E6;
         }
     </style>
 </head>
 <body>
-    <h1>Overview</h1>
+    <h1>Images of the Russian Empire: Colorizing the Prokudin-Gorskii photo collection</h1>
+    <h2>Overview</h2>
     <p>In this project, I took the digitized Prokudin-Gorskii glass plate images and then produced color images. The original glass plate images had 3 parts from top to bottom, each using blue, green, and red filters. I extracted these 3 parts and placed them on top of each other to create a color image. The programming language I used was Python.</p>
 
-    <h1>Single-Scale Appoach</h1>
+    <h2>Single-Scale Appoach</h2>
     <p>For smaller image files ('cathedral.jpg', 'monastery.jpg', 'tobolsk.jpg'), I used naive approach (2 for loops) to search for a small displacement that would align the green (or red) and blue parts of the image. The displacements I chose was from -15 to 15. The score for each displacement was calculated using Normalized Cross-Correlation. Eventually, the displacement I chose had the maximum score.</p>
     <img src="media/cathedral.jpg">
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
@@ -22,7 +25,7 @@
     <img src="media/tobolsk.jpg">
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
 
-    <h1>Multiscale Appoach</h1>
+    <h2>Multiscale Appoach</h2>
     <p>For larger image files (.tif), I used the image pyramid approach which would provide a faster search. To do so, I chose to downscale the images by 0.125, 0.25, and 0.5. I first downscaled the 2 images and then applied the naive approach described above. Finally, I multiplied the best displacement metrics by 2 to align with metrics at the level above it.</p>
     <img src="media/church.jpg">
     <p>green offset: 0, -8<br>red offset: 48, -8</p>
@@ -47,7 +50,7 @@
     <img src="media/train.jpg">
     <p>green offset: 112, -8<br>red offset: 104, 0</p>
 
-    <h1>Examples from Prokudin-Gorskii Collection</h1>
+    <h2>Examples from Prokudin-Gorskii Collection</h2>
     <img src="media/tree_og.jpg">
     <img src="media/tree.jpg">
     <p>green offset: 8, 0<br>red offset: 12, 0</p>
@@ -58,16 +61,19 @@
     <img src="media/bridge.jpg">
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
 
-
-    <h1>Failed Alignments</h2>
+    <h2>Failed Alignments</h2>
     <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. It could also be due to the brightness of these images. Moreover, aligning based on the similarities between the images' RGB values might not be the best indicator.</p>
 
-    <h1>Bells & Whistles</h1>
+    <h2>Bells & Whistles</h2>
     <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
-    <img src="media/monastery.jpg" style="width:100%">
-    <img src="media/monastery_canny.jpg" style="width:100%">
+    <img src="media/monastery.jpg" style="width:50%">
+    <p>green offset: -8, 0<br>red offset: 8, 0</p>
+    <img src="media/monastery_canny.jpg" style="width:50%">
+    <p>green offset: -4, 0<br>red offset: 4, 0</p>
     <img src="media/tobolsk.jpg">
+    <p>green offset: 0, 0<br>red offset: 8, 0</p>
     <img src="media/tobolsk_canny.jpg">
+    <p>green offset: 4, 0<br>red offset: 8, 0</p>
 
 </body>
 </html>
