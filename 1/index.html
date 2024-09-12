@@ -9,6 +9,14 @@
             text-align: center;
             background-color: #ADD8E6;
         }
+        img {
+            height: auto;
+            width: 400px;
+        }
+        .sbs {
+            float: left;
+            width: 50%;
+        }
     </style>
 </head>
 <body>
@@ -66,13 +74,13 @@
 
     <h2>Bells & Whistles</h2>
     <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
-    <img src="media/monastery.jpg" style="width:50%">
-    <p>green offset: -8, 0<br>red offset: 8, 0</p>
-    <img src="media/monastery_canny.jpg" style="width:50%">
-    <p>green offset: -4, 0<br>red offset: 4, 0</p>
-    <img src="media/tobolsk.jpg">
+    <img src="media/monastery.jpg" style="display:inline-block;">
+    <img src="media/monastery_canny.jpg" style="display:inline-block;">
+    <div class="sbs"><p>green offset: -8, 0<br>red offset: 8, 0</p></div>
+    <div class="sbs"><p>green offset: -4, 0<br>red offset: 4, 0</p></div>
+    <img src="media/tobolsk.jpg" style="display:inline-block;">
+    <img src="media/tobolsk_canny.jpg" style="display:inline-block;">
     <p>green offset: 0, 0<br>red offset: 8, 0</p>
-    <img src="media/tobolsk_canny.jpg">
     <p>green offset: 4, 0<br>red offset: 8, 0</p>
 
 </body>
