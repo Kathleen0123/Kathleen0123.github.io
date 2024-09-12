@@ -57,7 +57,7 @@
 
 
     <h1>Failed Alignments</h2>
-    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. I could also downscale the images even more in my image pyramid implementation.</p>
+    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. It could also be due to the brightness of these images.</p>
 
     <h1>Bells & Whistles</h1>
     <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
@@ -65,9 +65,6 @@
     <img src="media/monastery_canny.jpg" style="width:100%">
     <img src="media/tobolsk.jpg">
     <img src="media/tobolsk_canny.jpg">
-
-    <h1>Challenges</h2>
-    <p>Adding the canny edge detector did not achieve the anticipated speedup of the algorithm; it even slowed the process down.</p>
 
 </body>
 </html>
