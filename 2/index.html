@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 50px;
+            text-align: center;
+            background-color: #d6ecf3;
+        }
+        img {
+            height: auto;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fun with Filters and Frequencies!</h1>
+    
+    <h2>Part 1</h2>
+    <h3>Part 1.1: Gradient Magnitude Computation</h3>
+    <p>I first took the partial derivative in x (horizontal direction) and y (vertical direction) of an image by convolving the image with difference operators D_x and D_y. Then, the gradient magnitude was calculated by square-rooting the sum of the x and y gradient components squared. [np.sqrt(grad_x**2 + grad_y**2)]</p>
+    <img src="media/out/grad_x.png" style="display:inline-block;">
+    <img src="media/out/grad_y.png" style="display:inline-block;">
+    <img src="media/out/grad_mag.png" style="display:inline-block;">
+    <img src="media/out/binary.png" style="display:inline-block;">
+    <h3>Part 1.2:</h3>
+    <p></p>
+
+    <h2>Part 2</h2>
+    <h3>Part 2.1:</h3>
+    <p></p>
+    <h3>Part 2.2:</h3>
+    <p></p>
+    <h3>Part 2.3:</h3>
+    <p></p>
+    <h3>Part 2.4:</h3>
+    <p></p>
+
+    
+    <p>green offset: 0, 0<br>red offset: 8, 0</p>
+    <img src="media/monastery.jpg">
+    <p>green offset: -8, 0<br>red offset: 8, 0</p>
+    <img src="media/tobolsk.jpg">
+    <p>green offset: 0, 0<br>red offset: 8, 0</p>
+
+    <h2>Multiscale Appoach</h2>
+    <p>For larger image files (.tif), I used the image pyramid approach which provided a faster search. To do so, I chose to downscale the images by 0.125, 0.25, and 0.5. I first downscaled the 2 images and then applied the naive approach described above. Finally, I multiplied the best displacement metrics by 2 to align with metrics at the level above it. This algorithm eventually returned the best displacement at the original scale (scale=1).</p>
+    <img src="media/church.jpg">
+    <p>green offset: 0, -8<br>red offset: 48, -8</p>
+    <img src="media/emir.jpg">
+    <p>green offset: 0, 8<br>red offset: 104, 16</p>
+    <img src="media/harvesters.jpg">
+    <p>green offset: 120, 0<br>red offset: 120, 8</p>
+    <img src="media/icon.jpg">
+    <p>green offset: 48, 16<br>red offset: 88, 16</p>
+    <img src="media/lady.jpg">
+    <p>green offset: 56, -8<br>red offset: 120, -16</p>
+    <img src="media/melons.jpg">
+    <p>green offset: 80, 0<br>red offset: 120, -8</p>
+    <img src="media/onion_church.jpg">
+    <p>green offset: 56, 16<br>red offset: 104, 8</p>
+    <img src="media/sculpture.jpg">
+    <p>green offset: 32, -8<br>red offset: 112, -24</p>
+    <img src="media/self_portrait.jpg">
+    <p>green offset: 48, 0<br>red offset: 120, -8</p>
+    <img src="media/three_generations.jpg">
+    <p>green offset: 56, 8<br>red offset: 104, 8</p>
+    <img src="media/train.jpg">
+    <p>green offset: 112, -8<br>red offset: 104, 0</p>
+
+    <h2>Examples from Prokudin-Gorskii Collection</h2>
+    <img src="media/tree_og.jpg">
+    <img src="media/tree.jpg">
+    <p>green offset: 8, 0<br>red offset: 12, 0</p>
+    <img src="media/seeds_og.jpg">
+    <img src="media/seeds.jpg">
+    <p>green offset: 4, -4<br>red offset: 12, -8</p>
+    <img src="media/bridge_og.jpg">
+    <img src="media/bridge.jpg">
+    <p>green offset: 0, 0<br>red offset: 8, 0</p>
+
+    <h2>Challenges</h2>
+    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. These might work for some images but not the others. It could also be due to the different brightness of these images, making the calculation of score inaccurate. Moreover, aligning based on the similarities between the images' RGB values might not be the best indicator.</p>
+
+    <h2>Bells & Whistles</h2>
+    <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
+    <img src="media/monastery.jpg" style="display:inline-block;">
+    <img src="media/monastery_canny.jpg" style="display:inline-block;">
+    <p>Left/Before:<br>green offset: -8, 0<br>red offset: 8, 0</p>
+    <p>Right/After:<br>green offset: -4, 0<br>red offset: 4, 0</p>
+    <img src="media/tobolsk.jpg" style="display:inline-block;">
+    <img src="media/tobolsk_canny.jpg" style="display:inline-block;">
+    <p>Left/Before:<br>green offset: 0, 0<br>red offset: 8, 0</p>
+    <p>Right/After:<br>green offset: 4, 0<br>red offset: 8, 0</p>
+
+</body>
+</html>
