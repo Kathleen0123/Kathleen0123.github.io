@@ -48,7 +48,7 @@
 
     <h2>Part 2</h2>
 
-    <h3>Part 2.1:</h3>
+    <h3>Part 2.1: Adding high frequency to the original image could sharpen it. The high frequency was calculated by subtracting blurred version from the original image. The blurred version was calculated using Gaussian filter.</h3>
     <img src="media/out/taj_b.png" style="display:inline-block;">
     <img src="media/out/taj_a.png" style="display:inline-block;">
     <p>(before, after: alpha=3)</p>
@@ -64,6 +64,7 @@
     <p>(original, blurred, sharpened: alpha=3)</p>
 
     <h3>Part 2.2: Hybrid Images</h3>
+    <p>Blending high frequency portion of one image with the low-frequency portion of another allowed us to create a hybrid image that had different interpretations at different distances.</p>
     <img src="media/DerekPicture.jpg" style="display:inline-block;">
     <img src="media/nutmeg.jpg" style="display:inline-block;">
     <img src="media/out/2.2.png" style="display:inline-block;">
@@ -88,7 +89,7 @@
     <p>(eagle, dog, hybrid image)</p>
 
 
-    <h3>Part 2.3:</h3>
+    <h3>Part 2.3: We would like to create Gaussian Stack by applying the Gaussian filter at each level but do not subsample. The Laplacian Stack was calculated by subtracting one level of Gaussian stack from the level below it.</h3>
     <img src="media/out/apple1g.png" style="display:inline-block;">
     <img src="media/out/apple2g.png" style="display:inline-block;">
     <img src="media/out/apple3g.png" style="display:inline-block;">
@@ -116,7 +117,7 @@
     <p>(Laplacian stack of orange)</p>
 
 
-    <h3>Part 2.4:</h3>
+    <h3>Part 2.4: I used the Gaussian Stack of the mask, Laplacian Stacks of image1 and image2, to blend the images together.</h3>
     <img src="media/orange.jpeg" style="display:inline-block;">
     <img src="media/apple.jpeg" style="display:inline-block;">
     <img src="media/out/oraple.png" style="display:inline-block;">
