@@ -19,16 +19,36 @@
     <h1>Fun with Filters and Frequencies!</h1>
     
     <h2>Part 1</h2>
+
     <h3>Part 1.1: Gradient Magnitude Computation</h3>
-    <p>I first took the partial derivative in x (horizontal direction) and y (vertical direction) of an image by convolving the image with difference operators D_x and D_y. Then, the gradient magnitude was calculated by square-rooting the sum of the x and y gradient components squared. [np.sqrt(grad_x**2 + grad_y**2)]</p>
+    <p>Gradient magnitude computation measures the intensity of change in pixel values. I first took the partial derivative in x (horizontal direction) and y (vertical direction) of an image by convolving the image with difference operators D_x and D_y. Then, the gradient magnitude was calculated by combining these two measures: square-rooting the sum of the x and y gradient components squared. [np.sqrt(grad_x**2 + grad_y**2)]</p>
     <img src="media/out/grad_x.png" style="display:inline-block;">
     <img src="media/out/grad_y.png" style="display:inline-block;">
     <img src="media/out/grad_mag.png" style="display:inline-block;">
     <img src="media/out/binary.png" style="display:inline-block;">
-    <h3>Part 1.2:</h3>
+    <p>dx, dy, gradient magnitude, binarized</p>
+    
+    <h3>Part 1.2: Gaussian Filter</h3>
+    <p>Below are the results from convolving the image with a gaussian and repeating the procedures in part 1.1:</p>
+    <img src="media/out/1.2gx.png" style="display:inline-block;">
+    <img src="media/out/1.2gy.png" style="display:inline-block;">
+    <img src="media/out/1.2gm.png" style="display:inline-block;">
+    <img src="media/out/1.2bi.png" style="display:inline-block;">
+    <p>dx, dy, gradient magnitude, binarized</p>
     <p></p>
 
+    <p>Below are the results from convolving the gaussian with D_x and D_y first:</p>
+    <img src="media/out/12gdx.png" style="display:inline-block;">
+    <img src="media/out/12gdy.png" style="display:inline-block;">
+    <img src="media/out/12dx.png" style="display:inline-block;">
+    <img src="media/out/12dy.png" style="display:inline-block;">
+    <img src="media/out/12gm.png" style="display:inline-block;">
+    <img src="media/out/12bi.png" style="display:inline-block;">
+    <p>dx_gaussian, dy_gaussian, dx, dy, gradient magnitude, binarized</p>
+    
+
     <h2>Part 2</h2>
+
     <h3>Part 2.1:</h3>
     <p></p>
     <h3>Part 2.2:</h3>
@@ -39,7 +59,7 @@
     <p></p>
 
     
-    <p>green offset: 0, 0<br>red offset: 8, 0</p>
+    
     <img src="media/monastery.jpg">
     <p>green offset: -8, 0<br>red offset: 8, 0</p>
     <img src="media/tobolsk.jpg">
