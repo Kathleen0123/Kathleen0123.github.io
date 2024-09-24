@@ -29,91 +29,70 @@
     <p>dx, dy, gradient magnitude, binarized</p>
     
     <h3>Part 1.2: Gaussian Filter</h3>
-    <p>Below are the results from convolving the image with a gaussian and repeating the procedures in part 1.1:</p>
+    <p>Below are the results from convolving the image with a gaussian and repeating the procedures in part 1.1: I saw that the binarized image had thicker lines than the one in part 1.1.</p>
     <img src="media/out/1.2gx.png" style="display:inline-block;">
     <img src="media/out/1.2gy.png" style="display:inline-block;">
     <img src="media/out/1.2gm.png" style="display:inline-block;">
     <img src="media/out/1.2bi.png" style="display:inline-block;">
-    <p>dx, dy, gradient magnitude, binarized</p>
-    <p></p>
+    <p>(dx, dy, gradient magnitude, binarized)</p>
 
-    <p>Below are the results from convolving the gaussian with D_x and D_y first:</p>
+    <p>Below are the results from convolving the gaussian with D_x and D_y first: I got the same results as using the previous method.</p>
     <img src="media/out/12gdx.png" style="display:inline-block;">
     <img src="media/out/12gdy.png" style="display:inline-block;">
     <img src="media/out/12dx.png" style="display:inline-block;">
     <img src="media/out/12dy.png" style="display:inline-block;">
     <img src="media/out/12gm.png" style="display:inline-block;">
     <img src="media/out/12bi.png" style="display:inline-block;">
-    <p>dx_gaussian, dy_gaussian, dx, dy, gradient magnitude, binarized</p>
+    <p>(dx_gaussian, dy_gaussian, dx, dy, gradient magnitude, binarized)</p>
     
 
     <h2>Part 2</h2>
 
     <h3>Part 2.1:</h3>
-    <p></p>
-    <h3>Part 2.2:</h3>
-    <p></p>
+    <img src="media/out/taj_b.png" style="display:inline-block;">
+    <img src="media/out/taj_a.png" style="display:inline-block;">
+    <p>(before, after)</p>
+
+    <img src="media/out/animal_b.png" style="display:inline-block;">
+    <img src="media/out/animal_a.png" style="display:inline-block;">
+    <p>(before, after)</p>
+
+    <p>A sharp image of a bird, blurred it, and tried to sharpen it again:</p>
+    <img src="media/out/bird_o.png" style="display:inline-block;">
+    <img src="media/out/bird_b.png" style="display:inline-block;">
+    <img src="media/out/bird_a.png" style="display:inline-block;">
+    <p>(original, blurred, sharpened)</p>
+
+    <h3>Part 2.2: Hybrid Images</h3>
+    <img src="media/out/2.2.png" style="display:inline-block;">
+    <p>(Derek and Nutmeg)</p>
+
+    <p>Below is an example of change over time:</p>
+    <img src="media/plant1.png" style="display:inline-block;">
+    <img src="media/plant2.png" style="display:inline-block;">
+    <img src="media/out/plant_h.png" style="display:inline-block;">
+    <p>(before, after, hybrid image)</p>
+
+    <p>Below is an example of morph between different objects:</p>
+    <img src="media/out/f1.png" style="display:inline-block;">
+    <img src="media/out/f2.png" style="display:inline-block;">
+    <img src="media/out/f_lp.png" style="display:inline-block;">
+    <img src="media/out/f_hp.png" style="display:inline-block;">
+    <img src="media/out/f_hb.png" style="display:inline-block;">
+    <p>(Log magnitude of the Fourier transform of image 1, image 2, low-pass filtered image 1, high-pass filtered image 2, hybrid image)</p>
+    <img src="media/eagle.png" style="display:inline-block;">
+    <img src="media/dog.png" style="display:inline-block;">
+    <img src="media/out/dog_h.png" style="display:inline-block;">
+    <p>(eagle, dog, hybrid image)</p>
+
+
     <h3>Part 2.3:</h3>
     <p></p>
+
+    
     <h3>Part 2.4:</h3>
     <p></p>
 
-    
-    
-    <img src="media/monastery.jpg">
-    <p>green offset: -8, 0<br>red offset: 8, 0</p>
-    <img src="media/tobolsk.jpg">
-    <p>green offset: 0, 0<br>red offset: 8, 0</p>
-
-    <h2>Multiscale Appoach</h2>
-    <p>For larger image files (.tif), I used the image pyramid approach which provided a faster search. To do so, I chose to downscale the images by 0.125, 0.25, and 0.5. I first downscaled the 2 images and then applied the naive approach described above. Finally, I multiplied the best displacement metrics by 2 to align with metrics at the level above it. This algorithm eventually returned the best displacement at the original scale (scale=1).</p>
-    <img src="media/church.jpg">
-    <p>green offset: 0, -8<br>red offset: 48, -8</p>
-    <img src="media/emir.jpg">
-    <p>green offset: 0, 8<br>red offset: 104, 16</p>
-    <img src="media/harvesters.jpg">
-    <p>green offset: 120, 0<br>red offset: 120, 8</p>
-    <img src="media/icon.jpg">
-    <p>green offset: 48, 16<br>red offset: 88, 16</p>
-    <img src="media/lady.jpg">
-    <p>green offset: 56, -8<br>red offset: 120, -16</p>
-    <img src="media/melons.jpg">
-    <p>green offset: 80, 0<br>red offset: 120, -8</p>
-    <img src="media/onion_church.jpg">
-    <p>green offset: 56, 16<br>red offset: 104, 8</p>
-    <img src="media/sculpture.jpg">
-    <p>green offset: 32, -8<br>red offset: 112, -24</p>
-    <img src="media/self_portrait.jpg">
-    <p>green offset: 48, 0<br>red offset: 120, -8</p>
-    <img src="media/three_generations.jpg">
-    <p>green offset: 56, 8<br>red offset: 104, 8</p>
-    <img src="media/train.jpg">
-    <p>green offset: 112, -8<br>red offset: 104, 0</p>
-
-    <h2>Examples from Prokudin-Gorskii Collection</h2>
-    <img src="media/tree_og.jpg">
-    <img src="media/tree.jpg">
-    <p>green offset: 8, 0<br>red offset: 12, 0</p>
-    <img src="media/seeds_og.jpg">
-    <img src="media/seeds.jpg">
-    <p>green offset: 4, -4<br>red offset: 12, -8</p>
-    <img src="media/bridge_og.jpg">
-    <img src="media/bridge.jpg">
-    <p>green offset: 0, 0<br>red offset: 8, 0</p>
-
-    <h2>Challenges</h2>
-    <p>My algorithm did not align some of the images very well. I think it was because I used fixed parameters for all images. These might work for some images but not the others. It could also be due to the different brightness of these images, making the calculation of score inaccurate. Moreover, aligning based on the similarities between the images' RGB values might not be the best indicator.</p>
-
-    <h2>Bells & Whistles</h2>
-    <p>Since when aligning the 2 parts of an image, I used Normalized Cross-Correlation to calculate a score, it would take the borders into consideration. However, since these borders did not align exactly and thus had strange colors, I would like to crop them off before calculating the score. To do so, I used 'sk.feature.canny' as the edge detector. I applied this technique on 'monastery.jpg' and 'tobolsk.jpg', and they clearly demonstrated improvements on the images.</p>
-    <img src="media/monastery.jpg" style="display:inline-block;">
-    <img src="media/monastery_canny.jpg" style="display:inline-block;">
-    <p>Left/Before:<br>green offset: -8, 0<br>red offset: 8, 0</p>
-    <p>Right/After:<br>green offset: -4, 0<br>red offset: 4, 0</p>
-    <img src="media/tobolsk.jpg" style="display:inline-block;">
-    <img src="media/tobolsk_canny.jpg" style="display:inline-block;">
-    <p>Left/Before:<br>green offset: 0, 0<br>red offset: 8, 0</p>
-    <p>Right/After:<br>green offset: 4, 0<br>red offset: 8, 0</p>
 
 </body>
 </html>
