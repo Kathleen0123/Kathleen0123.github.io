@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 50px;
+            text-align: center;
+            background-color: #d6ecf3;
+        }
+        img {
+            height: auto;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face Morphing</h1>
+    
+    <h2>Part 1: Defining Correspondences</h2>
+    <p>I used the tool from last year's student to generate the corresponding keypoints on the two images. The picture on the left is me, and the one on the right is from the FEI Face Database.</p>
+    <img src="media/label1.png" style="display:inline-block;">
+    <img src="media/label2.png" style="display:inline-block;">
+    <p>To compute the triangulation, I first found the average of the keypoints of the two images. Then, I used scipy.spatial.Delaunay on the average points for the calculation.</p>
+    <img src="media/tri1.png" style="display:inline-block;">
+    <img src="media/tri2.png" style="display:inline-block;">
+
+    <h2>Part 2: Computing the "Mid-way Face"</h2>
+    <p>First, I defined a function that calculated the affine transformation matrix, which could transform one image's shape to the average shape.</p>
+    <p>Then, I wrote a warp function that used this computeAffine function. It created a triangle mask based on the average triangle points. Then, I found the source image's triangle shape by using the inverse of the affine transformation matrix. Next, I used scipy.interpolate.griddata to interpolate the color.</p>
+    <p>Eventually, I iterated through each triangle, got the 2 warped images, and averaged them in order to get the mid-way face.</p>
+    <img src="media/a.jpg" style="display:inline-block;">
+    <img src="media/mid.png" style="display:inline-block;">
+    <img src="media/b.jpg" style="display:inline-block;">
+
+    <h2>Part 3: The Morph Sequence</h2>
+    <p>I added two parameters, warp_frac and dissolve_frac, to make a morph gif. I set the range for each parameter to be [0,1] with a step size of 0.02, so there were a total of 50 frames. The process was similar to the mid-way face, but instead of averaging, some weights were used.</p>
+    <img src="media/output.gif">
+
+    <h2>Part 4: The "Mean face" of a population</h2>
+    <p>I used the frontalimages_spatiallynormalized images and the annotated shapes from FEI Face Database. I iterated through each image and each triangle and then averaged them to find the mean face.</p>
+    <img src="media/avg.png">
+    <p>Here are some images from the dataset warped into the average shape.</p>
+    <img src="media/2a.jpg" style="display:inline-block;">
+    <img src="media/3b.png" style="display:inline-block;">
+    <img src="media/4a.jpg" style="display:inline-block;">
+    <p>top: warped image; bottom: original image</p>
+    <p>Then, I changed my image to gray-scale and resized and cropped it to match the dataset images. I also found the corresponding keypoints on my face again. Below are my face warped into the average geometry, and the average face warped into my geometry.</p>
+    <img src="media/me_avg.png" style="display:inline-block;">
+    <img src="media/avg_me.png" style="display:inline-block;">
+
+    <h2>Part 5: Caricatures: Extrapolating from the mean</h2>
+    <p>I used the morph function defined before and set the parameters, warp_frac and dissolve_frac, to be 0.8 and 0.5.</p>
+    <img src="media/caricature.png">
+
+    <h2>Part 6: Bells and Whistles</h2>
+    <p>I tried to change the gender of my image. I downloaded the average asian male face from the website and resized and cropped it to match my image.</p>
+    <img src="media/aaaa.jpg" style="display:inline-block;">
+    <img src="media/male.jpg" style="display:inline-block;">
+    <p>Below are the results for morphing just the shape, just the appearance, and both.</p>
+    <img src="media/shape.png" style="display:inline-block;">
+    <img src="media/appear.png" style="display:inline-block;">
+    <img src="media/both.png" style="display:inline-block;">
+
+</body>
+</html>
