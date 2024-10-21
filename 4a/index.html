@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 50px;
+            text-align: center;
+            background-color: #d6ecf3;
+        }
+        img {
+            height: auto;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Warping and Mosaicing</h1>
+    
+    <h2>Part 1: Shoot the Pictures</h2>
+    <p>Here are some pictures I took!</p>
+    <p>First set:</p>
+    <img src="media/1.jpg" style="display:inline-block;">
+    <img src="media/2.jpg" style="display:inline-block;">
+    <p>Second set:</p>
+    <img src="media/3.jpg" style="display:inline-block;">
+    <img src="media/4.jpg" style="display:inline-block;">
+    <p>Third set:</p>
+    <img src="media/5.jpg" style="display:inline-block;">
+    <img src="media/6.jpg" style="display:inline-block;">
+
+    <h2>Part 2: Recover Homographies</h2>
+    <p>To compute the homography matrix, I first generated 15 corresponding points in each pair of images using the tool provided. Then, I set up a linear system of 15 equations (Ah=b) and solved it using np.linalg.lstsq.</p>
+    <p>A is </p>
+    <img src="media/A.png" style="display:inline-block;">
+    <p>b is </p>
+    <img src="media/b.png" style="display:inline-block;">
+    
+    <h2>Part 3: Warp the Images</h2>
+    <p>To warp an image, I first found the warped corners using the homography matrix and thus found the bounding box size. Then, I used inverse warping to map the points on this plane. Below are the warped images in each pair.</p>
+    <img src="media/w1.png" style="display:inline-block;">
+    <img src="media/w3.png" style="display:inline-block;">
+    <img src="media/w5.png" style="display:inline-block;">
+
+    <h2>Part 4: Image Rectification</h2>
+    <p>To make sure that my homography/warping worked, I took pictures of rectangular items from a side angle and used my warp function to rectify them. I used the provided tool to generate 4 pairs of corresponding points by clicking the 4 corners in the image and manually defining im2_points to be a rectangle.</p>
+    <p>Example 1:</p>
+    <img src="media/c.jpg" style="display:inline-block;">
+    <img src="media/cc.png" style="display:inline-block;">
+    <p>Example 2:</p>
+    <img src="media/d.jpg" style="display:inline-block;">
+    <img src="media/dd.png" style="display:inline-block;">
+
+    <h2>Part 5: Blend the images into a mosaic</h2>
+    <p>I first found the bounding box size by finding all the corners of the im1(warped) and im2(unwarped). Then, I set up 2 canvases of this size, one for im1(warped) and another one for im2(unwarped). I then shifted im2 to the correct location based on min_x and min_y of the corners. Eventually, I blended the 2 canvases together to generate the mosaic.</p>
+    <p>First set:</p>
+    <img src="media/1.jpg" style="display:inline-block;">
+    <img src="media/2.jpg" style="display:inline-block;">
+    <img src="media/12.png" style="display:inline-block;">
+    <p>Second set:</p>
+    <img src="media/3.jpg" style="display:inline-block;">
+    <img src="media/4.jpg" style="display:inline-block;">
+    <img src="media/34.png" style="display:inline-block;">
+    <p>Third set:</p>
+    <img src="media/5.jpg" style="display:inline-block;">
+    <img src="media/6.jpg" style="display:inline-block;">
+    <img src="media/56.png" style="display:inline-block;">
+
+  
+</body>
+</html>
