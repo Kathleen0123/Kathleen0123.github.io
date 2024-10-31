@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <h1>Image Warping and Mosaicing</h1>
+    <h1>Project 4A: Image Warping and Mosaicing</h1>
     
     <h2>Part 1: Shoot the Pictures</h2>
     <p>Here are some pictures I took!</p>
@@ -67,6 +67,48 @@
     <img src="media/6.jpg" style="display:inline-block;">
     <img src="media/56.png" style="display:inline-block;">
 
+
+    <h1>Project 4B: Feature Matching for Autostitching</h1>
+    
+    <h2>Step 1: Harris Interest Point Detector</h2>
+    <p>The first step was to detect all the Harris corners using the code provided. For each image, a Gaussian pyramid was created, and the interest points were extracted from each level of the pyramid.</p>
+    <img src="media/12h.png" style="display:inline-block;">
+    <img src="media/34h.png" style="display:inline-block;">
+    <img src="media/56h.png" style="display:inline-block;">
+
+    <h2>Step 1: Adaptive Non-Maximal Suppression</h2>
+    <p>To restrict the number of interest points extracted, I used adaptive non-maximal suppression to only retain those that were a maximum in a neighbourhood of radius r pixels. As suppression radius decreased from infinity, interest points were added to the list until nip = 500 points were selected.</p>
+    <img src="media/12a.png" style="display:inline-block;">
+    <img src="media/34a.png" style="display:inline-block;">
+    <img src="media/56a.png" style="display:inline-block;">
+
+    <h2>Step 2: Feature Descriptor</h2>
+    <p>As suggested in the paper, I created 40x40 windows around the corners. Then, I sampled 8x8 patches and used spacing of 5 pixels. Then I normalized the descriptor vector so that the mean was 0 and the standard deviation was 1.</p>
+    
+    <h2>Step 3: Feature Matching</h2>
+    <p>To match features in the two images, I used a threshold to compare against the ratio of the first nearest neighbor error and the second nearest neighbor error as suggested by Lowe.</p>
+    <img src="media/12f.png" style="display:inline-block;">
+    <img src="media/34f.png" style="display:inline-block;">
+    <img src="media/56f.png" style="display:inline-block;">
+
+    <h2>Step 4: RANSAC</h2>
+    <p>First, I randomly selected 4 feature pairs from the previously found matching feature points. I computed a homography from these points. Then, I calculated the number of inliers where dist(p2, H p1) is less than a threshold. Then, I found the homography with the largest number of inliers. I then recomputed the homography using all of the inliers.</p>
   
+    <h2>Step 5: Mosaic</h2>
+    <p>Here are the mosaic results:</p>
+    <img src="media/12.png" style="display:inline-block;">
+    <img src="media/12m.png" style="display:inline-block;">
+    <p>Left: manually<br>Right: automatically</p>
+    <img src="media/34.png" style="display:inline-block;">
+    <img src="media/34m.png" style="display:inline-block;">
+    <p>Left: manually<br>Right: automatically</p>
+    <img src="media/56.png" style="display:inline-block;">
+    <img src="media/56m.png" style="display:inline-block;">
+    <p>Left: manually<br>Right: automatically</p>
+
+    <h2>What I have learned</h2>
+    <p>I think the most interesting thing I've learned in the project is the feature detection. It is really cool to automatically detect and match the features in 2 images, making the process much easier and less prone to human mistakes.</p>
+
+
 </body>
 </html>
