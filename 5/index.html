@@ -28,7 +28,7 @@
     <img src="media/hat2.png" style="display:inline-block;">
     <p>'a rocket ship': the output is an animated rocket ship.</p>
     <img src="media/rocket1.png" style="display:inline-block;">
-    <img src="media/rocket2.jpg" style="display:inline-block;">
+    <img src="media/rocket2.png" style="display:inline-block;">
 
     <p>I changed the num_inference_steps for 'a man wearing a hat': </p>
     <p>num_inference_steps=5: The process was indeed faster, but the quality was not as good. In this newly generate image, we could barely see the hat.</p>
@@ -174,7 +174,7 @@
     <img src="media/test2.png" style="display:inline-block;">
     <img src="media/mask2.png" style="display:inline-block;">
     <img src="media/replace2.png" style="display:inline-block;">
-    <img src="media/inpain2.png" style="display:inline-block;">
+    <img src="media/inpaint2.png" style="display:inline-block;">
 
     <h2>Part 1.7.3: Text-Conditional Image-to-image Translation</h2>
     <p>Here are the edits of the test image at noise levels 1, 3, 5, 7, 10, 20 with the prompt "a rocket ship"</p>
@@ -245,8 +245,25 @@
     <img src="media/ood6.png" style="display:inline-block;">
     <img src="media/ood7.png" style="display:inline-block;">
 
-    
+
     <h2>Part 2: Training a Diffusion Model</h2>
+    <h3>Implementing a Time-conditioned UNet</h3>
+    <p>Training loss curve plot over the whole training process:</p>
+    <img src="media/losscurve1.png" style="display:inline-block;">
+    <p>Sampling results for the time-conditioned UNet for 5 epochs.</p>
+    <img src="media/time5.png" style="display:inline-block;">
+    <p>Sampling results for the time-conditioned UNet for 20 epochs.</p>
+    <img src="media/time20.png" style="display:inline-block;">
+
+
+    <h3>Implementing class-conditioned UNet</h3>
+    <p>A training loss curve plot for the class-conditioned UNet over the whole training process:</p>
+
+
+    <p>Sampling results for the class-conditioned UNet for 5 epochs</p>
+
+    
+    <p>Sampling results for the class-conditioned UNet for 20 epochs</p>
 
 
 </body>
