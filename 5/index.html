@@ -19,7 +19,7 @@
     <h1>Project 5A: The Power of Diffusion Models!</h1>
     
     <h2>Part 0: </h2>
-    <p>The seed I used was 180.</p>
+    <p>I used DeepFloyd's stage_1 and stage_2 objects for generation. The seed I used was 180.</p>
     <p>'an oil painting of a snowy mountain village': the output from stage1 is small and thus blurry while the output from stage2 is bigger and more clear. It does show a snowy village. However, it does not look like an oil painting.</p>
     <img src="media/snow1.png" style="display:inline-block;">
     <img src="media/snow2.png" style="display:inline-block;">
@@ -40,6 +40,8 @@
 
 
     <h2>Part 1.1: Implementing the forward process</h2>
+    <p>I used the equation below to calculate a noisy image x_t at timestep t.</p>
+    <img src="media/equation1.png">
     <p>Here's the original image:</p>
     <img src="media/test.png">
     <p>Here are the images at noise level 250, 500, 750. The image becomes noiser as the noise level increases.</p>
@@ -62,12 +64,14 @@
     <img src="media/forward1.png" style="display:inline-block;">
     <img src="media/forward2.png" style="display:inline-block;">
     <img src="media/forward3.png" style="display:inline-block;">
-    <p>Below are the images that used one-step denoising: I first used UNet to estimate the noise. Then I used equation 2 to predict x0 from xt and t.</p>
+    <p>Below are the images that used one-step denoising: I first used UNet to estimate the noise. Then I used the equation from above to predict x0 from xt and t.</p>
     <img src="media/onestep1.png" style="display:inline-block;">
     <img src="media/onestep2.png" style="display:inline-block;">
     <img src="media/onestep3.png" style="display:inline-block;">
 
     <h2>Part 1.4: Implementing Iterative Denoising</h2>
+    <p>I first created a list of strided timesteps, which was a list of monotonically decreasing timesteps, starting at 990, with a stride of 30, eventually reaching 0. Then I used the formula below to iteratively calculate x at the next timestep. Eventually, the image went from from more noisy to less noisy.</p>
+    <img src="media/equation2.png">
     <p>Below are the noisy images at noise level 90, 240, 390, 540, 690: </p>
     <img src="media/iterative1.png" style="display:inline-block;">
     <img src="media/iterative2.png" style="display:inline-block;">
@@ -81,7 +85,7 @@
     <img src="media/iterative_gaussian.png" style="display:inline-block;">
 
     <h2>Part 1.5: Diffusion Model Sampling</h2>
-    <p>Here are 5 sampled images by setting i_start = 0:</p>
+    <p>Here are 5 sampled images by using the iterative_denoise function from previous section and setting i_start = 0:</p>
     <img src="media/sample1.png" style="display:inline-block;">
     <img src="media/sample2.png" style="display:inline-block;">
     <img src="media/sample3.png" style="display:inline-block;">
@@ -89,6 +93,8 @@
     <img src="media/sample5.png" style="display:inline-block;">
 
     <h2>Part 1.6: Classifier Free Guidance</h2>
+    <p>By using CFG, I computed both a conditional and an unconditional noise estimate. The new noise estimate is thus provided by the equation below.</p>
+    <img src="media/equation3.png">
     <p>Here are 5 sampled images using CFG with 𝛾=7:</p>
     <img src="media/sample11.png" style="display:inline-block;">
     <img src="media/sample22.png" style="display:inline-block;">
@@ -97,6 +103,7 @@
     <img src="media/sample55.png" style="display:inline-block;">
 
     <h2>Part 1.7: Image-to-image Translation</h2>
+    <p>I started with a noisy image, then I set different start of the noise levels. As the start of the noise level increases, it matches the original image closer.</p>
     <p>Test Image</p>
     <img src="media/test.png" style="display:inline-block;">
     <p>Here are the edits of the test image at noise levels 1, 3, 5, 7, 10, 20: They gradually match the original image closer and closer.</p>
@@ -126,6 +133,8 @@
     <img src="media/edit666.png" style="display:inline-block;">
 
     <h2>Part 1.7.1: Editing Hand-Drawn and Web Images</h2>
+    <p>For the painted image, it overall matches the original image better than the drawn images.</p>
+    <p>For my drawn images, when i_start is small, the generated images are not relevant at all. But when i_start is at 10, 20, 30, it matches closer.</p>
     <p>Here's a painted image from the web:</p>
     <img src="media/web.png" style="display:inline-block;">
     <p>Here are the edits of this web image at noise levels 1, 3, 5, 7, 10, 20: </p>
@@ -160,6 +169,8 @@
 
 
     <h2>Part 1.7.2: Inpainting</h2>
+    <p>To inpaint, I used a binary mask. The generated image has same content where mask m is 0 but new content wherever mask m is 1.</p>
+    <img src="media/equation4.png">
     <p>Here's the test image inpainted:</p>
     <img src="media/test.png" style="display:inline-block;">
     <img src="media/mask.png" style="display:inline-block;">
@@ -177,6 +188,7 @@
     <img src="media/inpaint2.png" style="display:inline-block;">
 
     <h2>Part 1.7.3: Text-Conditional Image-to-image Translation</h2>
+    <p>The images gradually look more like original image as the noise level increases, but they also look somewhat like the text prompt.</p>
     <p>Here are the edits of the test image at noise levels 1, 3, 5, 7, 10, 20 with the prompt "a rocket ship"</p>
     <img src="media/rocket_test1.png" style="display:inline-block;">
     <img src="media/rocket_test2.png" style="display:inline-block;">
@@ -201,6 +213,8 @@
 
 
     <h2>Part 1.8: Visual Anagrams</h2>
+    <p>I used the following algorithm to obtain the visual anagrams, where p1 and p2 are two different text prompt embeddings, flip() is a function that flips the image top to bottom. </p>
+    <img src="media/equation5.png">
     <p>Here's a visual anagram where on one orientation "an oil painting of people around a campfire" is displayed and, when flipped, "an oil painting of an old man" is displayed.</p>
     <img src="media/campfire.png" style="display:inline-block;">
     <img src="media/oldman.png" style="display:inline-block;">
@@ -213,6 +227,8 @@
 
 
     <h2>Part 1.9: Hybrid Images</h2>
+    <p>I used the algorithm below: first use the diffusion model over p1 and p2, which are 2 different text prompt embeddings. Then lowpass the first noise estimate and highpass the second noise estimate. So we get an image that looks like one thing from far away but another object from close up.</p>
+    <img src="media/equation6.png">
     <p>Here's an image that looks like a skull from far away but a waterfall from close up.</p>
     <img src="media/skull_waterfall.png" style="display:inline-block;">
     <p>Here's an image that looks like a man from far away but a snowy mountain village from close up.</p>
