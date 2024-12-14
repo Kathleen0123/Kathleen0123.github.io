@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 50px;
+            text-align: center;
+            background-color: #d6ecf3;
+        }
+        img {
+            height: auto;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Final Project 1: High Dynamic Range</h1>
+    
+    <h2>Part 1: Radiance map reconstruction</h2>
+    <p>To recover a radiance map for the arch image, we need to first solve for g (one for each channel). The equations below are used. I set up a system of equations and then used np.linalg.lstsq to solve for g and natural log of E.</p>
+    <img src="media/eq1.png">
+    <p>Here are the generated graphs of g with the second-derivative smoothing term and tent function weighting:</p>
+    <img src="media/chapel1.png">
+    <p>Here are graphs of g without lambda, without weights, and without both of them:</p>
+    <img src="media/lambda.png" style="display:inline-block;">
+    <img src="media/weight.png" style="display:inline-block;">
+    <img src="media/both.png" style="display:inline-block;">
+    <p>Once we have g, we can construct the high dynamic range radiance map using the formula below:</p>
+    <img src="media/eq2.png">
+    <p>Here's the radiance map of the arch image.</p>
+    <img src="media/arch2.png">
+    
+
+    <h2>Part 2: Tone mapping</h2>
+    <p>A naive global tone map function in which exposure values are linearly scaled within the range of 0 to 1 is provided.</p>
+    <p>To implement the simple global tone mapping function, I used the equation: E_display = E_world / (1 + E_world)</p>    
+    <p>To implement a local method, I followed the steps in the spec.</p>
+    <p>Here are the images provided. The Durand local method has a better performance while the simple global method often shows a really bright image.</p>
+    <img src="media/arch3.png">
+    <img src="media/bonsai3.png">
+    <img src="media/chapel3.png">
+    <img src="media/garage3.png">
+    <img src="media/garden3.png">
+    <img src="media/house3.png">
+    <img src="media/mug3.png">
+    <img src="media/window3.png">
+
+
+    <h2>Part 3: Hero image</h2>
+    <p>I chose the arch image and applied high-pass filter to sharpen the details in the image as the durand image was a little blurry.</p>    
+    <img src="media/arch4.png">
+
+
+    <h2>Bells & Whistles</h2>
+    <p>The garden images are not well-aligned, so I used the technique in project 1 to align the images. Then, I produced the following results.</p>
+    <img src="media/align1.png">
+    <img src="media/align2.png">
+    <img src="media/align3.png">
+    <p>Below is a comparison between not-aligned and aligned. The aligned images clearly produce a better result.</p>
+    <img src="media/na.png" style="display:inline-block;">
+    <img src="media/a.png" style="display:inline-block;">
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 50px;
+            text-align: center;
+            background-color: #d6ecf3;
+        }
+        img {
+            height: auto;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Final Project 2: Lightfield Camera: Depth Refocusing and Aperture Adjustment with Light Field Data</h1>
+    <p>If we capture images by moving the camera around while keeping the optical axis direction unchanged, we can create complex effects with only simple operations such as shifting and averaging.</p>
+    
+    <h2>Part 1: Depth Refocusing</h2>
+    <p>If we simply average the images, the resulting image will just be blurry around near objects but sharp around the far-away ones. If we want to change the focused object, we can use a different depth. To do so, I chose the center to be the reference coordinate. Then, for each image, I calculated its offset from the reference and multiplied it by a scaling factor c to get its shift. I eventually shifted all the images and averaged them to get a refocused image.</p>
+    <img src="media/c0.0.png" style="display:inline-block;">
+    <img src="media/c0.25.png" style="display:inline-block;">
+    <img src="media/c0.5.png" style="display:inline-block;">
+    <p>c = 0.0, 0.25, 0.5</p>
+    <img src="media/refocus.gif">
+    <p>As c increases, it focuses more on the nearby objects.</p>
+
+    <h2>Part 2: Aperture Adjustment</h2>
+    <p>We can use less images when averaging to mimic a smaller aperture. I used c = 0. When averaging the images, I only included images whose distance to the reference was smaller than r.</p>
+    <img src="media/r0.png" style="display:inline-block;">
+    <img src="media/r4.png" style="display:inline-block;">
+    <img src="media/r8.png" style="display:inline-block;">
+    <p>r = 0, 4, 8</p>
+    <img src="media/aperture.gif">
+    <p>With r = 0, the image is sharp everywhere. As r increases, it focuses more on the far-away objects.</p>
+
+    <h2>Part 3: Summary</h2>
+    <p>In this project, I learned how we can process the images easily to change its focus just like how we would adjust it when capturing an image with a camera.</p>
+
+</body>
+</html>
