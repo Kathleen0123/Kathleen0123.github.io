@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kathleen Ge</title>
+    <title>Kathleen's Projects</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            margin: 50px;
+            margin-top: 20px;
+            height: 100vh;
+            background: linear-gradient(to bottom, #F7CAC9, #91A8D0);
         }
+
+        body a {
+            color: black;
+            text-decoration: none;
+        }
+
         nav {
-            background-color: #333;
-            overflow: hidden; /* Prevent content from overflowing */
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            background-color: transparent;
+            padding: 10px 20px;
         }
 
         nav ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        nav li {
-            float: left; /* Float items to create a horizontal layout */
+            display: flex;
         }
 
         nav li a {
             display: block;
-            color: white;
+            color: black;
             text-align: center;
             padding: 14px 16px;
-            text-decoration: none;
         }
 
         nav li a:hover {
-            background-color: #ddd;
-            color: black;
+            color: gray;
         }
 
     </style>
@@ -44,17 +49,24 @@
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
+            <li><a href="research.html">Research</a></li>
             <li><a href="projects.html">Projects</a></li>
         </ul>
     </nav>
 
-    <h1>Welcome to My CS180 Portfolio!</h1>
-    <a href="./180/1/index.html">Project 1</a>
-    <a href="./180/2/index.html">Project 2</a>
-    <a href="./180/3/index.html">Project 3</a>
-    <a href="./180/4/index.html">Project 4</a>
-    <a href="./180/5/index.html">Project 5</a>
-    <a href="./180/6/index.html">Final Project 1</a>
-    <a href="./180/7/index.html">Final Project 2</a>
+    <h1>CS180 Computer Vision Portfolio!</h1>
+    <ul>
+        <li><a href="180/1/index.html">Project 1: Image alignment using single-scale multi-scale pyramid searches<br></a></li>
+        <li><a href="180/2/index.html">Project 2: Hybrid images and multiresolution blending<br></a></li>
+        <li><a href="180/3/index.html">Project 3: Face morphing<br></a></li>
+        <li><a href="180/4/index.html">Project 4: Auto-stitching photo mosaics<br></a></li>
+        <li><a href="180/5/index.html">Project 5: Diffusion models<br></a></li>
+        <li><a href="180/6/index.html">Final Project 1: High dynamic range<br></a></li>
+        <li><a href="180/7/index.html">Final Project 2: Depth refocusing and aperture adjustment with light field data</a></li>
+    </ul>
+    
+   
+    
+    
 </body>
 </html>
